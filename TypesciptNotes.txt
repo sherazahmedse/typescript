@@ -1,0 +1,237 @@
+
+ts = js + type system. 
+
+goal: 
+ts is pure js only a type system helps us during development ONLY. 
+while we are writing code type system is constantly analysing our code and looking for bugs, 
+it finds a bug then it just pops up error in our code editor
+
+how does ts check errors ?
+it uses type annotations: (think if it as little comments to describe purpose of our code)
+
+
+ts is only active during development
+Does ts code goes in production while using it with node js? NO 
+Does it goes in browser? NO.
+we are just going to compile our ts and we get js out of that 
+
+
+
+ts compiler does not provide any performance optimization unlike other strongly type languages 
+------------------------------------------------------------
+ts code (with annotations) -> feed to to ts compilar -> gives us errors if any -> gives us plain old js 
+
+------------------------------------------------------------
+
+interface in typescript is used to define the structure/type of the object
+
+------------------------------------------------------------
+ 
+what you need to learn with typescript.. 
+* ) Syntax and features 
+* ) design patterns with ts 
+
+-----------------------------------
+------- Syntax and features -------
+-----------------------------------
+
+-----> Types
+Easy way to refer to different properties and functions that a value has 
+value : anything that we can assign to a variable
+
+two different categories of types 
+
+Primitive types : 
+
+numbers | boolean | void | undefiend | string | symbol | null
+
+Object types :  
+
+functions | arrays | classes | objects  
+
+----------------------------------------------------------------------
+
+Type annotations  + type inference
+
+Type annotations & type inference features apply differently to 
+variables
+functions
+objects
+ 
+
+Type annotations : code to tell ts what type of value a variable refers to
+
+Type inference : with type inference ts will try to automatically figure out what type of value the variable refers to  
+
+check features/annotations/variable.ts
+
+when to use annotations and inference 
+
+rely on type inference ALL THE TIME (ALWAYS) when you can!!! how ? declare and initialize on the same line. 
+3 senarios when we need to use annotations 
+
+1st senario 
+whenever a function returns the any type 
+
+
+
+----------------------------------------------------------------------
+
+
+
+The any type 
+it is assigned by ts when it can't figure out the type of a value being assinged to a variable
+
+How to fix any type 
+Method 1 : Put type annotation on the variable that the value is being assigned to .  
+
+when to use type annotations: see features/annotations/variables.ts
+
+
+
+// Case 1 :
+//  functions that returns any type 
+// CASE 2 
+// When we declare variable on one line and initialze it later
+// CASE 3 
+// WHEN we want a variable to have a type that cant be infered 
+
+----------------------------------------------------------------------
+
+
+annotations with functions;
+
+we tell ts what type of arguments the function will recive and what type of value the functions will return.
+
+type inference with functions;
+
+NOTE : type inference only works arround the return value of a function.
+it will only figure out the return type.
+it will not figure out the type of the arguments.
+
+
+
+
+----------------------------------------------------------------------
+ 
+ a function that returns type is void can return null and undefiend;
+
+----------------------------------------------------------------------
+Never return type in ts means that we are never going to reach the end of the function 
+
+----------------------------------------------------------------------
+
+
+Destructuring with annotations
+
+---------------------------------------------
+// arrays. 
+// 2d arrays. 
+// multi typed arrays. 
+----------------------------------------
+tuples vs arrays 
+
+Tuples
+
+-------------------
+
+type aliases ;
+
+type drink = [string,boolean, number] 
+
+-----------------------
+
+interfaces
+Creates a new type 
+
+
+long type interfaces
+
+
+---------------------
+classes in ts 
+looking at inheritance system
+
+no need to use any keyword while overiding in TS 
+
+-------------------------------
+
+differenec between normal ES2015 classes and ts classes
+
+modifiers
+public(defualt) private protected. 
+-------------------------
+
+what are type definition files 
+[ TS CODE ] -> [ Type Definition File ] -> [ JS Library ] 
+ts checks our code and it also checks the code of the Libraries we use 
+some Libraries has type definition files missing 
+
+its like an adaptor between ts code and js Library  
+
+type definition files are saved with the extention of file.d.ts
+
+
+--------------
+modules 
+imports 
+exports 
+convention in ts is that we never use defualt 
+
+
+
+--------------
+implicit checks 
+
+// User class begins
+export class User {
+
+  name: string; 
+  location : {
+    lat: number;
+    lng: number;
+  }; 
+}
+// class ends here 
+
+
+
+
+// User class CustomMap
+
+interface Mappable {
+  location : {
+    lat: number,
+    lng: number
+  }
+} 
+export class CustomMap 
+{
+  public addMarker (mappable: Mappable ) 
+  { 
+    console.log(mappable);    
+  } 
+} 
+
+// CustomMap class ends
+
+
+index.ts file 
+
+import { User } from "./user";
+import { CustomMap } from "./CustomMap";
+
+const user = new User();
+
+const map = new CustomMap(); 
+map.addMarker(user);
+
+
+TS is doing implicit type check for us 
+
+
+
+
+
+
+
